@@ -19,7 +19,6 @@ package org.geirove.kafka.examples;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Properties;
 
 import kafka.javaapi.producer.Producer;
@@ -70,14 +69,14 @@ public class SesamProducer {
 		Producer<String, String> producer = new Producer<String, String>(new ProducerConfig(props));
 		try {
 			FileInputStream istream = new FileInputStream(inputFile);
-			CSVReader csvReader = new CSVReader(new InputStreamReader(istream, "UTF-16"));
+			CSVReader csvReader = new CSVReader(new InputStreamReader(istream, "UTF-16"), '\t');
 			try {
 				String[] row = null;
 				while((row = csvReader.readNext()) != null) {
 					if (row.length > 0) {
-						System.out.println(Arrays.asList(row));
 						String key = row[0];
 						String value = join(row, "\t");
+						System.out.println("'" + key + "' -> " + value);
 						producer.send(new KeyedMessage<String, String>(topic, key, value));
 					}
 				}
