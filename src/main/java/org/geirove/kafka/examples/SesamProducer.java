@@ -48,7 +48,7 @@ public class SesamProducer {
 		String inputFile = "/Users/geir.gronmo/Downloads/DateValue.txt";
 		if (args.length != 3) {
 			System.out.println("Usage: org.geirove.kafka.examples.SesamProducer <brokerList> <topic> <inputFile>");
-			//			System.exit(1);
+			System.exit(1);
 		} else {
 			brokerList = args[0];
 			topic = args[1];
