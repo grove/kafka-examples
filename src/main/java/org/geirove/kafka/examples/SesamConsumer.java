@@ -147,7 +147,7 @@ public class SesamConsumer {
 		SimpleConsumer simpleConsumer = new SimpleConsumer(leaderHost, leaderPort,
 				100000, 64*1024, clientId);
 		try {
-
+			System.out.println("Fetching topic: " + topicId + " partition: " + partitionId + " offset: " + offset);
 			FetchRequest req = new FetchRequestBuilder()
 			.clientId(clientId)
 			.addFetch(topicId, partitionId, offset, 100000)
