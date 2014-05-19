@@ -24,6 +24,7 @@ import java.util.Properties;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
+import au.com.bytecode.opencsv.CSVParser;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class SesamProducer {
@@ -69,7 +70,7 @@ public class SesamProducer {
 		Producer<String, String> producer = new Producer<String, String>(new ProducerConfig(props));
 		try {
 			FileInputStream istream = new FileInputStream(inputFile);
-			CSVReader csvReader = new CSVReader(new InputStreamReader(istream, "UTF-16"), '\t');
+			CSVReader csvReader = new CSVReader(new InputStreamReader(istream, "UTF-16"), '\t', CSVParser.DEFAULT_QUOTE_CHARACTER, 1);
 			try {
 				String[] row = null;
 				while((row = csvReader.readNext()) != null) {
