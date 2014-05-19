@@ -27,22 +27,26 @@ import kafka.producer.ProducerConfig;
 import au.com.bytecode.opencsv.CSVParser;
 import au.com.bytecode.opencsv.CSVReader;
 
+/**
+ * Create topic with this command: 
+ * 
+ *   kafka-topics.sh --create --topic ams --partitions 3 --zookeeper 192.168.50.5:2181 --replication-factor 2
+ *   
+ * List topics:
+ * 
+ *   kafka-topics.sh --zookeeper 192.168.50.5:2181 --list
+ *   
+ * Tail topic:
+ * 
+ *   kafka-console-consumer.sh --zookeeper 192.168.50.5:2181 --topic ams --from-beginning
+ * 
+ * Usage:
+ * 
+ * mvn exec:java -D"exec.mainClass"="org.geirove.kafka.examples.SesamProducer" -Dexec.args="192.168.50.20:9092 ams2 /Users/geir.gronmo/Downloads/DateValue.txt"
+ * 
+ */
 public class SesamProducer {
 
-	/**
-	 * Create topic with this command: 
-	 * 
-	 *   kafka-topics.sh --create --topic ams --partitions 3 --zookeeper 192.168.50.5:2181 --replication-factor 2
-	 *   
-	 * List topics:
-	 * 
-	 *   kafka-topics.sh --zookeeper 192.168.50.5:2181 --list
-	 *   
-	 * Tail topic:
-	 * 
-	 *   kafka-console-consumer.sh --zookeeper 192.168.50.5:2181 --topic ams --from-beginning
-	 * 
-	 */
 	public static void main(String[] args) throws Exception {
 		String brokerList = "192.168.50.20:9092";
 		String topic = "ams";

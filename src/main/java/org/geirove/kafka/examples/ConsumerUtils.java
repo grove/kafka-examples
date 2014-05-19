@@ -7,6 +7,7 @@ import java.util.List;
 import kafka.javaapi.PartitionMetadata;
 import kafka.javaapi.TopicMetadata;
 import kafka.javaapi.TopicMetadataRequest;
+import kafka.javaapi.TopicMetadataResponse;
 import kafka.javaapi.consumer.SimpleConsumer;
 
 public class ConsumerUtils {
@@ -34,7 +35,6 @@ public class ConsumerUtils {
 				}
 			}
 		}
-		System.out.println("Unable to find new leader after Broker failure. Exiting");
 		throw new Exception("Unable to find new leader after Broker failure. Exiting");
 	}
 
@@ -47,7 +47,7 @@ public class ConsumerUtils {
 					consumer = new SimpleConsumer(seed.getHostname(), seed.getPort(), 100000, 64 * 1024, "leaderLookup");
 					List<String> topics = Collections.singletonList(topicId);
 					TopicMetadataRequest req = new TopicMetadataRequest(topics);
-					kafka.javaapi.TopicMetadataResponse resp = consumer.send(req);
+					TopicMetadataResponse resp = consumer.send(req);
 
 					List<TopicMetadata> metaData = resp.topicsMetadata();
 					for (TopicMetadata item : metaData) {

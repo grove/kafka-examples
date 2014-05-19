@@ -33,6 +33,12 @@ import kafka.javaapi.message.ByteBufferMessageSet;
 import kafka.message.Message;
 import kafka.message.MessageAndOffset;
 
+/**
+ * Usage:
+ * 
+ * mvn exec:java -D"exec.mainClass"="org.geirove.kafka.examples.SesamConsumer" -Dexec.args="192.168.50.22:9092 ams2 2 10000"
+ *
+ */
 public class SesamConsumer {
 
 	private static final class Result {
@@ -159,9 +165,9 @@ public class SesamConsumer {
 			}
 			ByteBufferMessageSet messageSet = (ByteBufferMessageSet) fetchResponse.messageSet(topicId, partitionId);
 			
-			System.out.println("Bytes: " + messageSet.validBytes());
+			System.out.println("Received bytes: " + messageSet.validBytes());
 			Result r = printMessages(messageSet);
-			System.out.println("Messages: " + r.getNumRead() + " " + r.getNextOffset());
+			System.out.println("Messages: " + r.getNumRead() + " Offset: " + r.getNextOffset());
 			return r;
 		} finally {
 			simpleConsumer.close();
